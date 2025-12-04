@@ -28,3 +28,4 @@ def login_required(f):
         return f(*args, **kwargs)
     return wrapper
 
+print("hej")
