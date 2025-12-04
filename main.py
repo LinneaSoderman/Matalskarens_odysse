@@ -9,7 +9,7 @@ url = URL.create(
     port=5432,
     username="postgres",
     password="Linnea10",
-    database="matälskarens_odysse(den)"
+    database="matalskarens_odysee"
 )
 engine = create_engine(url)
 
@@ -28,4 +28,3 @@ def login_required(f):
         return f(*args, **kwargs)
     return wrapper
 
-print("hej")
