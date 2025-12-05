@@ -33,7 +33,17 @@ def login_required(f):
     return wrapper
 
 
+@app.get('/detailed-description-of-each-trip')
+def get_trip_details():
+    with Session() as session:
+        result = session.execute(text("""
+            SELECT * FROM detaljerad_beskrivning_om_varje_resa
+        """)).fetchall()
 
+    # Om du vill returnera JSON måste du konvertera Row-objekten
+    product_list = [dict(row._mapping) for row in result]
+
+    return jsonify(product_list), 200
 
 
 
