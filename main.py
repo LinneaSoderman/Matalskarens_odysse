@@ -9,7 +9,7 @@ url = URL.create(
     port=5432,
     username="postgres",
     password="Linnea10",
-    database="matalskarens_odysee"
+    database="matälskarens-odyssé"
 )
 engine = create_engine(url)
 
