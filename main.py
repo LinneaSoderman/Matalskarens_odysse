@@ -3,13 +3,17 @@ from sqlalchemy import create_engine, URL, text
 from sqlalchemy.orm import sessionmaker
 from functools import wraps
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 url = URL.create(
     drivername="postgresql+psycopg2",
-    host="localhost",
-    port=5432,
-    username="postgres",
-    password="Linnea10",
-    database="matalskarens_odysee"
+    host=os.getenv("DB_HOST"),
+    port=os.getenv("DB_PORT"),
+    username=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_DATABASE")
 )
 engine = create_engine(url)
 
