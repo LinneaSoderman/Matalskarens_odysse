@@ -27,7 +27,7 @@ Session = sessionmaker(bind=engine)
 def login_required(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
-        if "user_id" not in session:
+        if "users_id" not in session:
             return jsonify({"message": "Authentication required."}), 401
         return f(*args, **kwargs)
     return wrapper
