@@ -63,6 +63,18 @@ def get_trip_details():
 
     return jsonify(product_list), 200
 
+@app.get('/show-if-accommodation-is-fully-booked')
+def get_se_om_ett_boende_är_fullbokat():
+    with Session() as session:
+        result = session.execute(text("""
+            SELECT * FROM se_om_ett_boende_är_fullbokat
+        """)).fetchall()
+
+    # Om du vill returnera JSON måste du konvertera Row-objekten
+    product_list = [dict(row._mapping) for row in result]
+
+    return jsonify(product_list), 200
+
 
 @app.post('/users')
 def create_user():
@@ -84,9 +96,6 @@ def create_user():
         session.commit()
 
     return jsonify({"message": f"user '{first_name}' was created successfully."}), 201
-
-
-
 
 
 
