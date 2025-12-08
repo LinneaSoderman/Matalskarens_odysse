@@ -110,4 +110,3 @@ def get_trip_details():
 
 
 
-
