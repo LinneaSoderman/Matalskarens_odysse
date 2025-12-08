@@ -119,4 +119,3 @@ def get_se_om_ett_boende_är_fullbokat():
 
 
 
-
