@@ -153,8 +153,22 @@ def book_room():
 if __name__ == "__main__":
     app.run(debug=True)
 
+@app.get('/feature/enter-amount-of-adults-and-children')
+def get_enter_adults_children():
+    with Session() as session:
+        result = session.execute(text("SELECT * FROM visar_hotell_där_man_kan_se_om_boendet_har_tillräcklig_kapaci")).fetchall()
+        adults_children_list = [
+            {
+                "hotel_name": row.hotel_name,
+                "room_type": row.room_type,
+                "total_beds": row.total_beds,
+                "adults": row.adults,
+                "kids": row.kids
 
+            } for row in result
+        ]
 
+    return jsonify(adults_children_list), 200
 
 
 
