@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, sessiongit
+from flask import Flask, jsonify, request, session
 from sqlalchemy import create_engine, URL, text
 from sqlalchemy.orm import sessionmaker
 from functools import wraps
@@ -32,6 +32,14 @@ def login_required(f):
         return f(*args, **kwargs)
     return wrapper
 
+@app.get('/show-departures-arivals')
+def get_departures_arivals():
+    with Session() as session:
+        result = session.execute(text("SELECT * FROM som_resenär_vill_jag_se_avgångs_och_ankomsttider")).fetchall()
+
+    product_list = [dict(row._mapping) for row in result]
+
+    return jsonify(product_list), 200
 
 
 
