@@ -66,7 +66,7 @@ def get_departures_arivals():
 
     return jsonify(product_list), 200
 
-
+git
 
 
 
