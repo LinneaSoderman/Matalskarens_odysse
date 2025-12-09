@@ -57,6 +57,9 @@ def get_trip_details():
         result = session.execute(text("""
             SELECT * FROM detaljerad_beskrivning_om_varje_resa
         """)).fetchall()
+
+
+
 @app.get('/show-departures-arivals')
 def get_departures_arivals():
     with Session() as session:
