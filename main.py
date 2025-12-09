@@ -58,7 +58,7 @@ def get_trip_details():
             SELECT * FROM detaljerad_beskrivning_om_varje_resa
         """)).fetchall()
 
-    product_list = [dict(row.mapping) for row in result]
+    product_list = [dict(row._mapping) for row in result]
 
     return jsonify(product_list), 200
 
@@ -184,8 +184,6 @@ def book_room():
     }), 201
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
 @app.get('/hotel/search')
 def search_hotel():
@@ -261,6 +259,8 @@ def get_se_om_ett_boende_är_fullbokat():
 
 
 
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 
