@@ -58,6 +58,7 @@ def get_trip_details():
             SELECT * FROM detaljerad_beskrivning_om_varje_resa
         """)).fetchall()
 
+    return jsonify(product_list), 200
 
 
 @app.get('/show-departures-arivals')
@@ -70,6 +71,191 @@ def get_departures_arivals():
     return jsonify(product_list), 200
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  @app.post('/users')
+def create_user():
+    with Session() as session:
+        data = request.get_json()
+        first_name = data.get("first_name")
+        last_name = data.get("last_name")
+        email = data.get("email")
+        password = data.get("password")
+
+        if not first_name or not last_name or not email or not password:
+            return jsonify({"message": "Please provide all required fields."}), 400
+
+        session.execute(text("""INSERT INTO users (first_name, last_name, email, password) 
+                                          VALUES (:first_name, :last_name, :email, :password)
+                                       """),
+                                  {"first_name": first_name, "last_name": last_name, "email": email, "password": password})
+
+        session.commit()
+
+    return jsonify({"message": f"user '{first_name}' was created successfully."}), 201
+        
+        
+        
+        
+        
+        
+        
 @app.post('/login')
 def login():
     data = request.get_json() or {}
