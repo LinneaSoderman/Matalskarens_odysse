@@ -192,7 +192,7 @@ def search_hotel():
             for row in result
         ]
         
-     return jsonify(accommodations_list), 200 
+    return jsonify(accommodations_list), 200
       
       
 @app.get('/feature/enter-amount-of-adults-and-children')
