@@ -153,6 +153,48 @@ def book_room():
 if __name__ == "__main__":
     app.run(debug=True)
 
+@app.get('/hotel/search')
+def search_hotel():
+    city = request.args.get("city")
+    country = request.args.get("country")
+    guests = request.args.get("guests")
+
+    query = """
+        SELECT *
+        FROM "söka_efter_lediga_boenden_i_en_viss_region_och_tidsperiod"
+        WHERE 1=1
+    """
+    params = {}
+
+    if city:
+        query += " AND city = :city"
+        params["city"] = city
+
+    if country:
+        query += " AND country = :country"
+        params["country"] = country
+
+    if guests:
+        query += " AND guest_limit >= :guests"
+        params["guests"] = int(guests)
+
+    with Session() as db:
+        result = db.execute(text(query), params).fetchall()
+
+        accommodations_list = [
+            {
+                "hotel_id": row.hotel_id,
+                "hotel_name": row.hotel_name,
+                "city": row.city,
+                "country": row.country,
+                "guest_limit": row.guest_limit
+            }
+            for row in result
+        ]
+        
+     return jsonify(accommodations_list), 200 
+      
+      
 @app.get('/feature/enter-amount-of-adults-and-children')
 def get_enter_adults_children():
     with Session() as session:
@@ -170,9 +212,7 @@ def get_enter_adults_children():
 
     return jsonify(adults_children_list), 200
 
-
-
-
+    
 
 
 
