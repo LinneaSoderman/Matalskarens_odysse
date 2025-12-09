@@ -213,7 +213,17 @@ def get_enter_adults_children():
     return jsonify(adults_children_list), 200
 
     
+@app.get('/show-if-accommodation-is-fully-booked')
+def get_se_om_ett_boende_är_fullbokat():
+    with Session() as session:
+        result = session.execute(text("""
+            SELECT * FROM se_om_ett_boende_är_fullbokat
+        """)).fetchall()
 
+    # Om du vill returnera JSON måste du konvertera Row-objekten
+    product_list = [dict(row._mapping) for row in result]
+
+    return jsonify(product_list), 200
 
 
 
